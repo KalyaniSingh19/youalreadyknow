@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> My Valentine 💕</title>
+  <title>My Valentine 💕</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -19,59 +19,76 @@
 
     .container {
       text-align: center;
+      padding: 20px;
     }
 
     h1 {
       color: #ff4f8b;
       margin-bottom: 25px;
       font-size: 2rem;
-      text-shadow: 0 0 10px #ffc2d6;
     }
 
+    /* Envelope */
     .envelope {
       position: relative;
-      width: 300px;
-      height: 200px;
-      background: linear-gradient(135deg, #ff8fab, #ffb3c6);
+      width: 320px;
+      height: 210px;
+      background: #ff8fab;
       border-radius: 12px;
       margin: auto;
       cursor: pointer;
       transition: transform 0.4s ease;
-      box-shadow: 0 20px 35px rgba(255,105,180,0.35);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      overflow: visible;
     }
 
     .envelope:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
-    .envelope:before {
+    /* Flap */
+    .envelope::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #ffc2d6, #ffd6e8);
-      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      background: #ffb3c6;
+      clip-path: polygon(0 0, 100% 0, 50% 55%);
       border-radius: 12px 12px 0 0;
-      transition: 0.7s ease;
+      transition: 0.6s;
       transform-origin: top;
+      z-index: 3;
+    }
+
+    .open::before {
+      transform: rotateX(180deg);
+      z-index: 0; /* move flap behind video */
     }
 
     .letter {
       position: absolute;
-      bottom: 15px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 260px;
-      min-height: 120px;
+      width: 280px;
+      height: 160px;
       background: white;
       border-radius: 10px;
       padding: 12px;
       box-sizing: border-box;
-      transition: 0.9s ease;
+      transition: 0.8s ease;
       overflow: visible;
-      box-shadow: 0 8px 18px rgba(255,105,180,0.25);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .open .letter {
+      bottom: 90px;
+      height: 440px;
     }
 
     .letter p {
@@ -79,59 +96,50 @@
       color: #ff4f8b;
       margin: 0;
       line-height: 1.4;
-      animation: fadeIn 1s ease;
+      text-align: center;
     }
 
-    iframe {
+    video {
       width: 100%;
-      height: 280px;
+      height: auto;
+      max-height: 100%;
       border-radius: 10px;
+      object-fit: contain;
+      background: black;
       display: none;
       margin-top: 10px;
-      background: #ffeaf2;
-      box-shadow: 0 0 20px rgba(255,105,180,0.6);
-      border: 3px solid #ff8fab;
-      animation: popIn 0.7s ease;
     }
 
-    .btn {
-      margin-top: 22px;
-      background: linear-gradient(135deg, #ff4f8b, #ff2f74);
-      color: white;
-      border: none;
-      padding: 13px 26px;
-      font-size: 1rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 10px 18px rgba(255,47,116,0.4);
-    }
-
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px rgba(255,105,180,0.7);
-    }
-
-    .open:before {
-      transform: rotateX(180deg);
-    }
-
-    .open .letter {
-      bottom: 120px;
-    }
-
-    .open iframe {
+    .open video {
       display: block;
     }
 
+    .btn {
+      margin-top: 20px;
+      background: #ff4f8b;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      font-size: 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      background: #ff2f74;
+      transform: scale(1.05);
+    }
+
+    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
-      font-size: 22px;
+      font-size: 20px;
       animation: floatUp 6s linear infinite;
-      opacity: 0.85;
+      opacity: 0.8;
       pointer-events: none;
-      filter: drop-shadow(0 0 5px #ff8fab);
     }
 
     @keyframes floatUp {
@@ -140,37 +148,17 @@
       100% { transform: translateY(-110vh) scale(1.6); opacity: 0; }
     }
 
-    .sparkle {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: radial-gradient(circle, #fff, #ffd6e8);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparkle 1.5s ease-out forwards;
-    }
-
-    @keyframes sparkle {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(3); opacity: 0; }
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.7); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hint {
-      font-size: 0.85rem;
-      color: #ff4f8b;
-      margin-top: 6px;
-      opacity: 0.85;
-      display: none;
+    @media (max-width: 480px) {
+      .envelope {
+        width: 260px;
+        height: 180px;
+      }
+      .letter {
+        width: 230px;
+      }
+      .open .letter {
+        height: 380px;
+      }
     }
   </style>
 </head>
@@ -183,36 +171,32 @@
       <div class="letter">
         <p id="text">
           Until I see you and actually give you the reaction you deserve,
-          this is me putting my feelings into something I can actually send 💖
+          this is me putting my feelings into something I can actually send 💕
         </p>
 
-        <!-- 🔥 REPLACE FILE_ID BELOW -->
         <video id="video" controls playsinline preload="auto">
-  <source src="your_video.mp4" type="video/mp4">
-</video>
-
-        <div class="hint" id="hint">Tap video for fullscreen 💕</div>
+          <source src="your_video.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
 
-    <button class="btn" id="openBtn">Open Letter 💕</button>
+    <button class="btn" id="openBtn">Open Letter 💖</button>
   </div>
 
   <script>
     const envelope = document.getElementById("envelope");
     const button = document.getElementById("openBtn");
     const text = document.getElementById("text");
-    const frame = document.getElementById("videoFrame");
-    const hint = document.getElementById("hint");
+    const video = document.getElementById("video");
 
     button.onclick = () => {
       envelope.classList.add("open");
       text.style.display = "none";
-      frame.style.display = "block";
-      hint.style.display = "block";
-      sparkleBurst();
+      video.style.display = "block";
+      video.play();
     };
 
+    // Floating hearts
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -221,27 +205,7 @@
       heart.style.animationDuration = 4 + Math.random() * 3 + "s";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
-    }, 350);
-
-    document.addEventListener("click", e => {
-      const s = document.createElement("div");
-      s.className = "sparkle";
-      s.style.left = e.clientX + "px";
-      s.style.top = e.clientY + "px";
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 1500);
-    });
-
-    function sparkleBurst() {
-      for (let i = 0; i < 15; i++) {
-        const s = document.createElement("div");
-        s.className = "sparkle";
-        s.style.left = (window.innerWidth / 2 + (Math.random() * 100 - 50)) + "px";
-        s.style.top = (window.innerHeight / 2 + (Math.random() * 100 - 50)) + "px";
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 1500);
-      }
-    }
+    }, 400);
   </script>
 </body>
 </html>
